@@ -1,0 +1,90 @@
+---
+title: "DatasauRus"
+author: "Edwin Paute"
+date: "2025-10-27"
+output: html_document
+---
+### Importacion de Librerias.
+
+```{r librerias}
+suppressPackageStartupMessages(library(dplyr))
+library(datasauRus)
+```
+
+### Visualizacion de Datos
+```{r visualizacion}
+datasaurus_dozen %>%
+  group_by(dataset) %>%
+  summarise(
+    mean_x    = mean(x),
+    mean_y    = mean(y),
+    std_dev_x = sd(x),
+    std_dev_y = sd(y),
+    corr_x_y  = cor(x, y)
+  )
+```
+
+```{r libreriaG}
+library(ggplot2)
+```
+
+```{r visualizacionG}
+ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset)) +
+  geom_point() +
+  theme_void() +
+  theme(legend.position = "none") +
+  facet_wrap(~dataset, ncol = 3)
+```
+
+
+### TAREA
+
+Visualizacion de la regresion Lineal en figura **STAR**
+
+```{r regresion_star, echo=TRUE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(datasauRus)
+
+# Filtrar el dataset "star"
+star_data <- datasaurus_dozen %>% 
+  filter(dataset == "star")
+
+# Gráfico con estilo oscuro y moderno
+ggplot(star_data, aes(x = x, y = y)) +
+  geom_point(
+    color = "#F4D03F",   # amarillo brillante
+    size = 2.8,
+    alpha = 0.85
+  ) +
+  geom_smooth(
+    method = "lm",
+    color = "#58D68D",   # verde esmeralda
+    se = TRUE,
+    fill = "#58D68D33",  # verde translúcido
+    linewidth = 1
+  ) +
+  labs(
+    title = "Regresión Lineal: 'Star'",
+    subtitle = "Visualización con estilo oscuro y línea de tendencia (verde)",
+    x = "Variable X",
+    y = "Variable Y",
+    caption = "Fuente: Datasaurus Dozen"
+  ) +
+  theme_minimal(base_size = 14, base_family = "Arial") +
+  theme(
+    plot.background = element_rect(fill = "#1C1C1C", color = NA), # fondo oscuro
+    panel.background = element_rect(fill = "#1C1C1C", color = NA),
+    panel.grid.major = element_line(color = "#333333", linetype = "dotted"),
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold", color = "#F7F9F9", size = 18),
+    plot.subtitle = element_text(color = "#BFC9CA", size = 13),
+    axis.title = element_text(color = "#EAECEE", face = "bold"),
+    axis.text = element_text(color = "#D5DBDB"),
+    plot.caption = element_text(color = "#AEB6BF", hjust = 1)
+  )
+
+```
+
+
+###
