@@ -1,7 +1,11 @@
 # Universidad Politecnica Salesiana
 
+*Informacion de Autoria:*
+
 **Nombre:** Edwin Paute
+
 **Carrera:** Computacion
+
 **Periodo:** 67
 
 ## Cuarteto de Anscombe
